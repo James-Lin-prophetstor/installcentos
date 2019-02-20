@@ -82,7 +82,7 @@ fi
 echo "******"
 
 # install updates
-yum update -y
+# yum update -y
 
 # install the following base packages
 yum install -y  wget git zile nano net-tools docker-1.13.1\
