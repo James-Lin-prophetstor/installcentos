@@ -224,6 +224,8 @@ mkdir -p /etc/origin/master/
 touch /etc/origin/master/htpasswd
 
 sed -i -e "s/os_sdn_network_plugin_name='redhat\/openshift-ovs-multitenant'/os_sdn_network_plugin_name='redhat\/openshift-ovs-subnet'/" ./inventory.ini
+#openshift_public_hostname=172.31.4.198
+#openshift_master_default_subdomain=apps.172.31.4.198.nip.io
 exit 0
 ansible-playbook -i inventory.ini openshift-ansible/playbooks/prerequisites.yml
 ansible-playbook -i inventory.ini openshift-ansible/playbooks/deploy_cluster.yml
