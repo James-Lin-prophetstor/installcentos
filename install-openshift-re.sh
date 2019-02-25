@@ -227,7 +227,8 @@ sed -i -e "s/os_sdn_network_plugin_name='redhat\/openshift-ovs-multitenant'/os_s
 #openshift_public_hostname=172.31.4.198
 #openshift_master_default_subdomain=apps.172.31.4.198.nip.io
 sed -i -e "s/console\.//g" ./inventory.ini
-exit 0
+sed -i -e "s/openshift_public_hostname=${IP}.nip.io/openshift_public_hostname=${IP}/" ./inventory.ini
+
 ansible-playbook -i inventory.ini openshift-ansible/playbooks/prerequisites.yml
 ansible-playbook -i inventory.ini openshift-ansible/playbooks/deploy_cluster.yml
 
