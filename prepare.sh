@@ -38,7 +38,7 @@ sed -i -e "s/^enabled=1/enabled=0/" /etc/yum.repos.d/epel.repo
 systemctl restart docker
 systemctl enable docker
 
-echo -e "\n\n\n" | ssh-keygen -t rsa
+ssh-keygen -q -f ~/.ssh/id_rsa -N ""
 
 echo " "
 #============================================================
@@ -53,6 +53,9 @@ then
     export VERSION=3.11
     git clone https://github.com/openshift/openshift-ansible.git
     cd openshift-ansible && git fetch && git checkout release-${VERSION}
+	
+	mkdir -p /etc/origin/master/
+	touch /etc//origin/master/htpasswd
 fi
 
 echo " "
