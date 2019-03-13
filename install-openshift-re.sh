@@ -222,6 +222,7 @@ fi
 
 mkdir -p /etc/origin/master/
 touch /etc/origin/master/htpasswd
+htpasswd -b /etc/origin/master/htpasswd ${USERNAME} ${PASSWORD}
 
 sed -i -e "s/os_sdn_network_plugin_name='redhat\/openshift-ovs-multitenant'/os_sdn_network_plugin_name='redhat\/openshift-ovs-subnet'/" ./inventory.ini
 #openshift_public_hostname=172.31.4.198
@@ -229,10 +230,11 @@ sed -i -e "s/os_sdn_network_plugin_name='redhat\/openshift-ovs-multitenant'/os_s
 sed -i -e "s/console\.//g" ./inventory.ini
 sed -i -e "s/openshift_public_hostname=${IP}.nip.io/openshift_public_hostname=${IP}/" ./inventory.ini
 
+exit 0
 ansible-playbook -i inventory.ini openshift-ansible/playbooks/prerequisites.yml
 ansible-playbook -i inventory.ini openshift-ansible/playbooks/deploy_cluster.yml
 
-htpasswd -b /etc/origin/master/htpasswd ${USERNAME} ${PASSWORD}
+
 oc adm policy add-cluster-role-to-user cluster-admin ${USERNAME}
 
 if [ "$PVS" = "true" ]; then
