@@ -38,7 +38,7 @@ sed -i -e "s/^enabled=1/enabled=0/" /etc/yum.repos.d/epel.repo
 systemctl restart docker
 systemctl enable docker
 
-ssh-keygen -q -N ""
+echo -e "\n\n\n" | ssh-keygen -t rsa
 
 echo " "
 #============================================================
