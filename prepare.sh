@@ -20,6 +20,7 @@ select_role()
 }
 
 select_role
+echo " "
 #============================================================
 echo "# step::install compute node requirements..."
 
@@ -38,6 +39,8 @@ systemctl restart docker
 systemctl enable docker
 
 ssh-keygen -q -N ""
+
+echo " "
 #============================================================
 if [ $R -eq 1 ]
 then
@@ -51,3 +54,5 @@ then
     git clone https://github.com/openshift/openshift-ansible.git
     cd openshift-ansible && git fetch && git checkout release-${VERSION}
 fi
+
+echo " "
