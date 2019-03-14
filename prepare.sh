@@ -1,15 +1,17 @@
 # Prepare system before openshift 3.11 installation.
 # On centos 7.6 1810 and later.
+# Should run this script on every openshift nodes.
+
 select_role()
 {
-    echo "Is opehshift master node?"
-    echo "1) Master"
-    echo "2) no"
+    echo "Is opehshift master node? "
+    echo "1) Master and Compute node."
+    echo "2) Compute node only."
     read R
     case "$R" in
         1) echo "set Master node."
         ;;
-        2) echo "set compute node."
+        2) echo "set Compute node."
         ;;
         *) echo "enter 1 or 2:"
             until [  $R -eq 1 ] || [ $R -eq 2 ]
@@ -21,8 +23,8 @@ select_role()
 
 select_role
 echo " "
-#============================================================
-echo "# step::install compute node requirements..."
+echo "##############################################################"
+echo "# Step:1:install compute node requirements."
 
 yum install -y  wget git zile nano net-tools docker-1.13.1\
 				bind-utils iptables-services \
@@ -41,11 +43,10 @@ systemctl enable docker
 ssh-keygen -q -f ~/.ssh/id_rsa -N ""
 
 echo " "
-#============================================================
+echo "##############################################################"
 if [ $R -eq 1 ]
 then
-    echo "# step::install compute node requirements..."
-    echo "install master requirements...."
+    echo "# step:2:install Master node requirements."
     yum install -y git \
                    pyOpenSSL
     curl -o ansible.rpm https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.6.5-1.el7.ans.noarch.rpm
