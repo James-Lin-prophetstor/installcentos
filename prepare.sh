@@ -56,7 +56,7 @@ then
     cd openshift-ansible && git fetch && git checkout release-${VERSION}
 	
 	mkdir -p /etc/origin/master/
-	touch /etc//origin/master/htpasswd
+	touch /etc/origin/master/htpasswd
 fi
 
 echo " "
